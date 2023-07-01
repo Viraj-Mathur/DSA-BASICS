@@ -1,0 +1,1 @@
+int LinearSearch(int key);
