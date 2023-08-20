@@ -37,7 +37,7 @@ public:
 };
 
 
-// Approach 2: Space Optimised O(1)
+// Approach 2: Space Optimised O(1) -> AS index-1 and index-2 is only being used 
 class Solution {
 public:
 
