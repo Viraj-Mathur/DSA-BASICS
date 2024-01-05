@@ -1,5 +1,3 @@
-// CODE FOR LEFT SHIFT , RIGHT SHIFT AND ROTATION OF ARRAY
-// c++ source code for get(), set(), min(), max(), sum(), avg()
 #include <iostream>
 
 using namespace std;
@@ -12,12 +10,14 @@ private:
     int *A;
 
 public:
+    // Constructor
     Array(int size)
     {
         this->size = size;
         A = new int[size];
     }
 
+    // Function to create an array
     void create()
     {
         cout << "ENTER THE LENGTH OF ARRAY : ";
@@ -29,6 +29,7 @@ public:
         }
     }
 
+    // Function to display the array elements
     void display()
     {
         cout << "THE ELEMENTS IN THE ARRAY ARE : ";
@@ -36,104 +37,101 @@ public:
         {
             cout << A[i] << "  ";
         }
+        cout << endl;
     }
+
+    // Function to perform left shift
+    void lshift();
     
-    void lshift(Array *ar);
-    void rshift(Array *ar);
-    void lRotate(Array *ar);
-    void rRotate(Array *ar);
+    // Function to perform right shift
+    void rshift();
+    
+    // Function to perform left rotation
+    void lRotate();
+    
+    // Function to perform right rotation
+    void rRotate();
 
+    // Function to get the length of the array
+    int getLength() const;
+
+    // Destructor
     ~Array();
-
-     
 };
 
-void Array::lshift(Array *ar){
-    for(int i=0;i<ar->length-1;i++){
-        ar->A[i] = ar->A[i+1];  //shifting the array to left
-    }
-    ar->A[ar->length-1] = 0;  //MAKING THE LAST ELEMENT 0
+int Array::getLength() const {
+    return length;
 }
 
-void Array::rshift(Array *ar){
-    for(int i=ar->length-1; i>0; i--){  //RIGHT TRAVERSING
-        ar->A[i] = ar->A[i-1]; 
+void Array::lshift(){
+    for(int i = 0; i < length - 1; i++){
+        A[i] = A[i+1];
     }
-    ar->A[0] = 0;  //MAKING THE FIRST ELEMENT 0
+    A[length - 1] = 0;
 }
 
-// void Array::lRotate(Array *ar){
-//     int first_element = ar->A[0];  
-//     for(int i=0;i<ar->length-1;i++){
-//         ar->A[i] = ar->A[i+1];
-//     }
-//     ar->A[ar->length-1] = first_element;
-// }
-
-void Array::lRotate(Array *ar){
-    int first = ar->A[0];
-    for(int i=0;i<length-1;i++){
-        ar->A[i] = ar->A[i+1]; // Moving each array element to its left
+void Array::rshift(){
+    for(int i = length - 1; i > 0; i--){
+        A[i] = A[i-1];
     }
-
-    ar->A[length -1] = first; // Copying the first element of array to last
-
+    A[0] = 0;
 }
 
-void Array::rRotate(Array *ar){
-    int last_element = ar->A[ar->length -1];
-    for(int i=ar->length-1; i>0; i--){
-        ar->A[i] = ar->A[i-1];
+void Array::lRotate(){
+    int first = A[0];
+    for(int i = 0; i < length - 1; i++){
+        A[i] = A[i+1];
     }
-    ar->A[0] = last_element;
+    A[length - 1] = first;
 }
 
-Array::~ Array(){
-    delete [] A;
+void Array::rRotate(){
+    int last_element = A[length - 1];
+    for(int i = length - 1; i > 0; i--){
+        A[i] = A[i-1];
+    }
+    A[0] = last_element;
+}
+
+Array::~Array(){
+    delete[] A;
 }
 
 int main(){
-    int i, num;
-    cout<<"Enter number of times to left rotate: ";
-    cin>>num;
- 
-    // Actual rotation
-    num = num % size;
+    int num;
     
+    cout << "Enter number of times to left rotate: ";
+    cin >> num;
+
     Array A(100);
     A.create();
-    A.display();
-    cout<<endl;
-    cout<<endl;
     
-    cout<<"ELEMENTS IN THE ARRAY AFTER LEFT SHIFT ARE: "<<endl;
-    A.lshift(&A);
+    cout << "ELEMENTS IN THE ARRAY BEFORE OPERATIONS:" << endl;
     A.display();
-    cout<<endl;
-    cout<<endl;
+    cout << endl;
 
-    cout<<"ELEMENTS IN THE ARRAY AFTER RIGHT SHIFT ARE: "<<endl;
-    A.rshift(&A);
+    // Actual rotation
+    num = num % A.getLength();
+    
+    cout << "ELEMENTS IN THE ARRAY AFTER LEFT SHIFT:" << endl;
+    A.lshift();
     A.display();
-    cout<<endl;
-    cout<<endl;
+    cout << endl;
 
-    cout<<"ELEMENTS IN THE ARRAY AFTER LEFT ROTATION ARE: "<<endl;
-    A.lRotate(&A);
+    cout << "ELEMENTS IN THE ARRAY AFTER RIGHT SHIFT:" << endl;
+    A.rshift();
     A.display();
-    cout<<endl;
-    cout<<endl;
+    cout << endl;
 
-    cout<<"ELEMENTS IN THE ARRAY AFTER RIGHT ROTATION ARE: "<<endl;
-    A.rRotate(&A);
+    cout << "ELEMENTS IN THE ARRAY AFTER LEFT ROTATION:" << endl;
+    A.lRotate();
     A.display();
-    cout<<endl;
-    cout<<endl;
+    cout << endl;
 
-
-
-    //A.~Array();
-
+    cout << "ELEMENTS IN THE ARRAY AFTER RIGHT ROTATION:" << endl;
+    A.rRotate();
+    A.display();
+    cout << endl;
 
     return 0;
 }

@@ -59,7 +59,8 @@ public:
 
 };
 
-void Array::Append(int x){
+void Array::
+Append(int x){
     if(length<size){
         A[length++] = x;
     }
