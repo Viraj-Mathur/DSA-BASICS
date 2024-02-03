@@ -21,6 +21,7 @@ int getPivot(vector<int> & arr,int n){
     
     return s;
 }
+}
 
 // int binarySearch(int arr[], int s, int e, int key){
     int binarySearch(vector<int>& arr,int s, int e, int key){
