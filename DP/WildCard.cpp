@@ -82,3 +82,45 @@ public:
         
     }
 };
+
+
+// Approach 2: using DP the previous one gives TLE
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+        int m = s.size();
+        int n = p.size();
+        
+        // Create a DP table with (m + 1) rows and (n + 1) columns
+        vector<vector<bool>> dp(m + 1, vector<bool>(n + 1, false));
+        
+        // Base cases
+        dp[0][0] = true; // Empty string matches empty pattern
+        
+        // Fill the first row (s is empty)
+        for (int j = 1; j <= n; ++j) {
+            if (p[j - 1] == '*') {
+                dp[0][j] = dp[0][j - 1];
+            } else {
+                dp[0][j] = false;
+            }
+        }
+        
+        // Fill the DP table
+        for (int i = 1; i <= m; ++i) {
+            for (int j = 1; j <= n; ++j) {
+                if (p[j - 1] == s[i - 1] || p[j - 1] == '?') {
+                    dp[i][j] = dp[i - 1][j - 1];
+                } else if (p[j - 1] == '*') {
+                    dp[i][j] = dp[i][j - 1] || dp[i - 1][j];
+                } else {
+                    dp[i][j] = false;
+                }
+            }
+        }
+        
+        // The result is in dp[m][n]
+        return dp[m][n];
+    }
+};
+
