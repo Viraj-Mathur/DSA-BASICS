@@ -33,7 +33,7 @@ public:
 };
 
 // APPROACH 2: TWO POINTER
-class Solution {
+class Solution1 {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
         vector<pair<int,int>> numsWithIndex;
