@@ -1,2 +1,1 @@
-// Recursion solution
-        return solveRec(n,k,target);
+int ans = solveRec(1,n);
