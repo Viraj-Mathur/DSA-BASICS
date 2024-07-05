@@ -1,43 +1,41 @@
-
 #include <bits/stdc++.h>
 
 using namespace std;
 
-class Solution{
-    private:
-        bool dfs(int node, int parent, int vis[], vector<int>adj[]){
-            vis[node] = 1;
-            // visit adjencent node
-            for(auto adjecentNode: adj[node]){
-                // for unvisited adjencent node
-                if(!vis[adjecentNode]){
-                    if(dfs(adjecentNode,node, vis, adj) == true)
-                        return true;
-                }
-                // visited but not a parent node
-                else if(adjecentNode!= parent){
-                    return false;
-                }
+class Solution {
+private:
+    bool dfs(int node, int parent, vector<int>& vis, vector<int> adj[]) {
+        vis[node] = 1;
+        // visit adjacent nodes
+        for (auto adjacentNode : adj[node]) {
+            // for unvisited adjacent node
+            if (!vis[adjacentNode]) {
+                if (dfs(adjacentNode, node, vis, adj))
+                    return true;
+            }
+            // visited but not a parent node
+            else if (adjacentNode != parent) {
+                return true;
             }
         }
+        return false;
+    }
 
-    public:
-    
-        bool isCycle(int V, vector<int>adj[]){
-            int vis[V] = {0}; // 0 based indexing
-            
-            // for connected nodes otherwise simple dfs call would have been suffice
-            for(int i=0;i<V;i++){
-                if(!vis[i]){
-                    if(dfs(i, -1, vis, adj) == true) return true; 
-                }
+public:
+    bool isCycle(int V, vector<int> adj[]) {
+        vector<int> vis(V, 0); // 0 based indexing
+        
+        // for connected components
+        for (int i = 0; i < V; i++) {
+            if (!vis[i]) {
+                if (dfs(i, -1, vis, adj)) return true; 
             }
-            return false;
         }
+        return false;
+    }
 };
 
-int main(){
-    
+int main() {
     // V = 4, E = 2
     vector<int> adj[4] = {{}, {2}, {1, 3}, {2}};
     Solution obj;
