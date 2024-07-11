@@ -19,76 +19,137 @@ APPROACH: USING BFS TRAVERSAL
 */
 
 
+/*
+https://takeuforward.org/graph/word-ladder-i-g-29/
+
+In this problem statement, we need to keep the following conditions in mind:
+
+A word can only consist of lowercase characters.
+Only one letter can be changed in each transformation.
+Each transformed word must exist in the wordList including the targetWord.
+startWord may or may not be part of the wordList
+
+Queue: Define a queue data structure to store the BFS traversal.
+Hash set: Create a hash set to store the elements present in the word list to carry out the search and delete operations in O(1) time. 
 
 
+*/
 
 #include <bits/stdc++.h>
-
 using namespace std;
 
 class Solution {
 public:
-    int wordLadderLength(string startWord, string targetWord, vector<string>& wordList) {
-        // Creating a queue {word,transitions to reach ‘word’}
-        queue<pair<string, int >> q;
+    int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
 
-        q.push({startWord ,1});
+        // Creating a queue of type {word, number of transitions to reach 'word'}.
+        queue<pair<string, int>> q;
 
-        // push all values of worldList in a set coz it makes deletion easy with O(1) time complexity
+        // BFS traversal with pushing values in queue 
+        // when after a transformation, a word is found in wordList.
+        q.push({beginWord, 1});
 
-        unordered_set<string> st(wordList.begin(), wordList.end()); 
-        st.erase(startWord); //deleting the word after being used from the set
+        // Push all the values of wordList into a set - to make deletion easier and in less time complexity.
+        unordered_set<string> st(wordList.begin(), wordList.end());
 
-        while(!q.empty()){
-            string word = q.front().first; //word
-            int steps = q.front().second; //transition
+        // Erase the beginWord from the set to avoid re-visiting it.
+        st.erase(beginWord);
+
+        while (!q.empty()) {
+            string word = q.front().first;
+            int steps = q.front().second;
             q.pop();
 
-            // return the step when occurance of the targetWord is found
-
-            if(word == targetWord){
+            // Return steps as soon as the first occurrence of endWord, which is the target word, is found.
+            if (word == endWord) {
                 return steps;
             }
 
-            for(int i=0;i<word.size();i++){
-                // Now, replace each character of ‘word’ with char
-                // from a-z then check if ‘word’ exists in wordList.
+            // For each character in the word, try changing it to every possible character from 'a' to 'z'.
+            for (int i = 0; i < word.size(); i++) {
                 char original = word[i];
-                for(char ch = 'a';ch <= 'z';ch++){
+                for (char ch = 'a'; ch <= 'z'; ch++) {
                     word[i] = ch;
-                    
 
-                    // if word from the set exist push it in a queue
-                    if(st.find(word) != st.end()){
-                        st.erase(word);
-                        q.push({word, steps +1 });
+                    // Check if the modified word exists in the set and push it into the queue.
+                    if (st.find(word) != st.end()) {
+                        st.erase(word);  // Remove the word from the set to prevent re-visiting.
+                        q.push({word, steps + 1});
                     }
-
                 }
-                    word[i] = original;
-                    cout<< original;
-
-
-                    
+                word[i] = original;  // Restore the original character before moving to the next character.
             }
         }
 
-        // if word not found and cannot be converted
+        // If there is no transformation sequence possible
         return 0;
     }
 };
 
-int main(){
-
+int main() {
+    // Given wordList, startWord, and targetWord
     vector<string> wordList = {"des", "der", "dfr", "dgt", "dfs"};
     string startWord = "der", targetWord = "dfs";
- 
-    Solution obj;
-    cout<<"Transformed Words are: ";
-    int ans = obj.wordLadderLength(startWord, targetWord, wordList);
-    cout<<endl;
-    cout << "Total number of tranformations performed to reach the target word is: " << ans;
+
+    // Print the wordList
+    cout << "List: ";
+    for (const string& word : wordList) {
+        cout << word << " ";
+    }
     cout << endl;
-    
+
+    // Print the startWord and targetWord
+    cout << "Start Word: " << startWord << endl;
+    cout << "Target Word: " << targetWord << endl;
+
+    // Create an instance of Solution class
+    Solution obj;
+
+    // Output the result
+    cout << "Total number of transformations performed to reach the target word is: ";
+    int ans = obj.ladderLength(startWord, targetWord, wordList);
+    cout << ans << endl;
+
     return 0;
 }
+
+
+// same question as : 433. Minimum Genetic Mutation
+
+// O(N^2∗L)
+
+class Solution {
+public:
+    int minMutation(string startGene, string endGene, vector<string>& bank) {
+        queue<pair<string,int>>q;
+        q.push({startGene, 0});
+        unordered_set<string> st(bank.begin(), bank.end());
+
+        while(!q.empty()){
+            string word = q.front().first;
+            int step = q.front().second;
+            q.pop();
+
+            if(word == endGene ){
+                return step;
+            }
+
+            for(int i=0;i<word.size();i++){
+                char original = word[i];
+
+                for(char ch : "ACGT"){
+                    word[i] = ch;
+                    if(st.find(word)!= st.end()){
+                        st.erase(word);
+                        q.push({word,step+1});
+                    }
+                }
+                word[i] = original;
+            }
+
+
+        }
+
+        return -1;
+    }
+};
