@@ -37,7 +37,7 @@ Node* buildTree(Node* root){
 }
 
 /*
-a Traversal Using Queue
+a Traversal Using Queue -bfs  
 For each node, first, the node is visited and then it’s child nodes are put in a FIFO queue. 
 Then again the first node is popped out and then it’s child nodes are put in a FIFO queue 
 and repeat until queue becomes empty.
