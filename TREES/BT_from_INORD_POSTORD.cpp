@@ -64,7 +64,7 @@ private:
         // Find the position of the current element in the inorder traversal
         int position = nodeToIndex.at(element);
 
-        // Recursively construct the right and left subtrees
+        // Recursively construct the right and left subtrees[CATCH: recursion started from right then left because in case of postorder we will start filling from right subtree not left as in case of preorder]
         root->right = solve(inorder, postorder, index, position + 1, inorderEnd, nodeToIndex);
         root->left = solve(inorder, postorder, index, inorderStart, position - 1, nodeToIndex);
 
