@@ -1,4 +1,12 @@
-#include<iostream>
+#include <bits/stdc++.h>
+
+
+
+using namespace std;
+
+
+
+
 
 // DIAMETER OF THE TREE: LONGEST PATH BETWEEN ANY 2 (END)NODES
 
@@ -6,8 +14,19 @@
 APPROACHES: 1) LEFT SUBTREE 2} RIGHT SUBTREE 3}BOTH
 PAIR IN STL: Pair is used to combine together two values that may be of different data types. 
              Pair provides a way to store two heterogeneous objects as a single unit
+
 */
-using namespace std;
+
+struct Node {
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int val) {
+        data = val;
+        left = right = NULL;
+    }
+};
 
 class Solution{
     public:
@@ -21,7 +40,7 @@ class Solution{
         int left = height(node ->left);
         int right = height(node -> right);
 
-        int ans = max(left,right)+1 // will find the maximum of left or right node and add it with 1(root node)
+        int ans = max(left,right)+1; // will find the maximum of left or right node and add it with 1(root node)
         return ans;
     }
 
@@ -34,7 +53,7 @@ class Solution{
 
         int op1 = diameter(root-> left); //subtree left
         int op2 = diameter(root->right); //subtree right
-        int op3 = height(root->left)+height(root->right)+1 // mixture of both 1 is added for root node
+        int op3 = height(root->left)+height(root->right)+1; // mixture of both 1 is added for root node
         //this height function together with diameter function is making the complexity O(n^2) so should be avoided
         // TO RESOLVE TAKE HEIGHT AND DIAMETER EK SAATH USING PAIR
         int ans = max(op1,max(op2,op3));
@@ -64,7 +83,7 @@ class Solution{
     int dia(Node* root){
         return diameterFast(root).first;
     }
-}
+};
 
 int main(){
     
