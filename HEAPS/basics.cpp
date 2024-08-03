@@ -15,6 +15,7 @@ class heap {
         arr[0] = -1;
         size = 0;
     }
+// insertng for max heap
 
     void insert(int val) {
         size = size+1;
@@ -40,6 +41,8 @@ class heap {
         cout<<endl;
     }
 
+
+
     /* deletion process: 1.Put last node in first node(parent node)
                          2.Remove the last node
                          3.Propagate rest of the nodes to its correct postition 
@@ -53,7 +56,7 @@ class heap {
         }
         // step 1: Put last node in first node index(parent node)
         arr[1] = arr[size];
-        // step 2;
+        // step 2: delete the node
         size--;
 
         // Take root node to its correct postion
@@ -63,11 +66,11 @@ class heap {
             int leftIndex = 2*i; //formula for left index
             int rigthIndex = 2*i+1; // formula for rigth index
 
-            if(leftIndex < size && arr[i]< arr[leftIndex]){
+            if(leftIndex < size && arr[i]< arr[leftIndex]){ // if left index is greater 
                 swap(arr[i], arr[leftIndex]);
                 i = leftIndex; // updating the index position
             }
-            else if(rigthIndex < size && arr[i] < arr[rigthIndex]){
+            else if(rigthIndex < size && arr[i] < arr[rigthIndex]){ // if right index is greater 
                 swap(arr[i], arr[rigthIndex]);
                 i = rigthIndex; // updating the index position
             }

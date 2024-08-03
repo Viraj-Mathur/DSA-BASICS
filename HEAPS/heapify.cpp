@@ -3,29 +3,44 @@ Heapify refers to the process of rearranging the elements in a heap to maintain 
    In other words, it ensures that the largest (in a max-heap)
    or smallest (in a min-heap) element is always at the root of the heap.
 
+//    ek element ko sahi jagah par pahochana is heapify
+
    T.C: O(log n)
+*/
+
+
+/*
+in the build heap function we do not need to heapify the leaf node as they are already heaps
+NOTE IN COMPLETE BINARY TREE IF TREE SIZE IS "n" then no of leaf nodes = from (n/2 + 1) to n
+
+therefore NO NEED TO HEAPIFY NODES FROM N/2+1 TO N
+HEAPIFY NODES LESS THAN N/2 
+
 */
 
 #include <bits/stdc++.h>
 
 using namespace std;
 
-void heapify(int arr[], int n, int i)
+void heapify(int arr[], int n, int i) // given - array, its size and the index
 {
     int largest = i;
     int left = 2 * i;
     int right = 2 * i + 1;
 
-    if (left < n && arr[largest] < arr[left])
+    if (left < n && arr[largest] < arr[left]) // updating largest for left base condition
     {
         largest = left;
     }
-    if (right < n && arr[largest] < arr[right])
+    if (right < n && arr[largest] < arr[right]) // updating largest for right base condition
     {
         largest = right;
     }
 
-    if (largest != i)
+    // if left is greater replace root index with left
+    // if right is greater replace root index with right
+
+    if (largest != i) // this means left or right child is greater than the current node
     {
         swap(arr[largest], arr[i]);
         heapify(arr, n, largest);
@@ -41,11 +56,20 @@ void heapSort(int arr[], int n){
     {
         // step 1: swap first and last element
         swap(arr[size] ,arr[1]);
-        size --;
-        // step 2: reorder
+        size --; // last element is now sorted forget it
+        
+        // step 2: reorder using heapify function
         heapify(arr,size,1);
     }
     
+}
+
+void buildHeap(int arr[],int n){
+    // We need to start from the first non-leaf node 
+
+    for(int i = n/2;i>0;i--){
+        heapify(arr,n,i);
+    }
 }
 
 int main()
@@ -67,6 +91,15 @@ int main()
     cout << endl;
     cout << endl;
 
+    buildHeap(arr,n);
+    cout<<"Printing the heap"<<endl;
+    for(int i = 0;i<=n;i++){
+        cout<<arr[i]<<" ";
+    }
+
+    cout << endl;
+    cout << endl;
+
     // heapsort
     heapSort(arr,n);
 
@@ -79,7 +112,7 @@ int main()
     cout << endl;
 
 
-    // WE CAN ALSO USE PRIORITY QUEUE FOR MIN AND MAX HEAP
+    // WE CAN ALSO USE PRIORITY QUEUE  - stl function which act as MIN AND MAX HEAP
     
     // for max heap
     priority_queue<int> pq;;

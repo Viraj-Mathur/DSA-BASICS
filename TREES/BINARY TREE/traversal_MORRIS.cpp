@@ -3,7 +3,9 @@
 // normal traversal take O(N) time and O(N) SPACE 
 
 
-Morris Preorder Traversal is a tree traversal algorithm aiming to achieve a space complexity of O(1) without recursion or an external data structure. The algorithm should efficiently visit each node in the binary tree in preorder sequence, printing or processing the node values as it traverses, without using a stack or recursion.
+Morris Preorder Traversal is a tree traversal algorithm aiming to achieve a space complexity of O(1) without recursion or an external data structure. 
+The algorithm should efficiently visit each node in the binary tree in preorder sequence, printing or processing the node values as it traverses, 
+without using a stack or recursion.
 
 
 
@@ -16,9 +18,11 @@ Algo:
 
 Step 1:Initialise a current to traverse the tree. Set current to the root of the Binary Tree.
 
-Step 2: While the current is not null: If the current node has no left child, print the current node's value and move to the right child ie. set the current to its right child.
+Step 2: While the current is not null: If the current node has no left child, print the current node's value and move to the right child 
+        ie. set the current to its right child.
 
-Step 3: If the current node has a left child, we find the in-order predecessor of the current node. This in-order predecessor is the rightmost node in the left subtree or the left subtree's rightmost node.
+Step 3: If the current node has a left child, we find the in-order predecessor of the current node. 
+        This in-order predecessor is the rightmost node in the left subtree or the left subtree's rightmost node.
 
 If the right child of the in-order predecessor is null:
     Set the right child to the current node.

@@ -19,6 +19,7 @@ using namespace std;
 class Solution{
     public:
     
+    // function for heapify
     void heapify(vector<int> &arr, int n, int i) 
 {
     int largest = i;
