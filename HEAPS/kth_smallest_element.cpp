@@ -19,7 +19,7 @@ array is 7.
 
 // Approach 1 : use sorting to find kth element but complexity O(n log n)
 // Approach 2 : use min heap but as we need smallest it is not required as space complexity will be O(n)
-// Approach 3 : use min heap - tc O(n) and SC : O(k)
+// Approach 3 : use max heap - tc O(n) and SC : O(k)
 
 #include <bits/stdc++.h>
 
@@ -55,6 +55,33 @@ class Solution{
 };
 
 // TO FIND Kth largest element: USE MIN HEAP
+
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        // Step1: make the "MIN HEAP" for k elements
+         priority_queue<int,vector<int>,greater<int> >pq;
+
+         int r = nums.size()-1;
+
+
+        // insert initial k elements
+        for(int i =0; i<k; i++){
+            pq.push(nums[i]);    
+        }
+        // for remaining elements push only if they are greater than top 
+        // step 2:for (k-1)th element first delete the root node and push the element
+        for(int i = k; i<=r; i++){
+            if(nums[i] > pq.top()){
+                pq.pop();
+                pq.push(nums[i]);
+            }
+        }
+        // answer is the top of the priority queue
+        int ans = pq.top();
+        return ans;
+    }
+};
 
 int main(){
     
