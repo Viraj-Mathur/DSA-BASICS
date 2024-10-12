@@ -9,6 +9,12 @@ Explanation: "sad" occurs at index 0 and 6.
 The first occurrence is at index 0, so we return 0.
 
 */
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
 // Approach 1: TC - O(n * m)
 class Solution {
 public:

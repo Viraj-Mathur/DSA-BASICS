@@ -51,3 +51,13 @@ int main(){
     
     return 0;
 }
+
+/*
+final anagram map
+anagramMap = { 
+  "aet": ["eat", "tea", "ate"], 
+  "ant": ["tan", "nat"], 
+  "abt": ["bat"] 
+}
+
+*/

@@ -40,6 +40,7 @@ void RecursiveMergeSort(int A[], int low,int high){
 
     }
 }
+
 int main(){
     cout<<"Unsorted Array: "<<endl;
     int A[] = {3, 7, 9, 10, 6, 5, 12, 4, 11, 2};
@@ -56,3 +57,17 @@ int main(){
     
     return 0;
 }
+
+
+/*
+
+Complexity Analysis of Merge Sort:
+Time Complexity:
+Best Case: O(n log n), When the array is already sorted or nearly sorted.
+Average Case: O(n log n), When the array is randomly ordered.
+Worst Case: O(n log n), When the array is sorted in reverse order.
+Auxiliary Space: O(n), Additional space is required for the temporary array used during merging.
+
+
+Not in-place and slower than quick sort
+*/
